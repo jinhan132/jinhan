@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>PROJECT</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-messaging.js"></script>
+	<style>
+    .row.content {height: 1500px}
+    
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+	</style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4>Jinhan's Blog</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="admin.html">Home</a></li>
+        <li><a>news/board</a></li>
+        <li><a>chat</a></li>
+        <li class="active"><a href="admin_photo.html">Photos</a></li>
+      </ul><br>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Blog..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+		<h4><small>Photos</small></h4>
+		<div id="mydiv"></div>
+    
+		<hr>
+
+		<h2>Leave a photo</h2>
+		<form role="form" action="javascript:myInsert()">
+			<div class="form-group">
+				<textarea class="form-control" id="input_info" rows="10" required></textarea>
+			</div>
+			<button type="submit" class="btn btn-success">Submit</button>
+		</form>
+<div id="alert_zone" style="display:none;">
+		<div class="alert alert-success alert-dismissible fade in">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Success!</strong> Registration is complete. Press x to close.
+		</div>
+</div>
+		<br><br>
+      
+	
+    </div>
+  </div>
+</div>
+<script>
+  var config = {
+    apiKey: "AIzaSyCSW6tkKShGh13DfQ329kzxBuoVZxpSQaA",
+    authDomain: "test-project-a4780.firebaseapp.com",
+    databaseURL: "https://test-project-a4780.firebaseio.com",
+    projectId: "test-project-a4780",
+    storageBucket: "test-project-a4780.appspot.com",
+    messagingSenderId: "839196335289"
+  };
+  firebase.initializeApp(config);
+
+	var starCountRef = firebase.database().ref('photo');
+	starCountRef.on('value', function(snapshot) {
+
+	myObj = snapshot.val();
+	
+	$("#mydiv").html(myObj.info);
+	
+	$("#input_info").val(myObj.info);
+
+	});
+
+	
+	
+	function myInsert(){
+
+		var input_info = $("#input_info").val();
+		
+		firebase.database().ref('photo').set({
+		info : input_info
+		});
+	$("#alert_zone").show();
+	}
+
+	
+
+</script>
+<footer class="container-fluid">
+  <p>Footer Text</p>
+</footer>
+
+</body>
+</html>
+<!--
+/*******************************/
+			sample
+/*******************************/
+
+<style>
+  .bg-1 {
+    background-color: #1abc9c; /* Green */
+    color: #ffffff;
+  }
+  .bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+  }
+  .bg-3 {
+    background-color: #ffffff; /* White */
+    color: #555555;
+  }
+  </style>
+
+<div class="container-fluid bg-1 text-center">
+  <h3>Who Am I???</h3>
+  <img src="https://www.w3schools.com/bootstrap/bird150.jpg" class="img-circle" alt="Bird">
+  <h3>I'm an adventurer</h3>
+</div>
+
+<div class="container-fluid bg-2 text-center">
+  <h3>What Am I?</h3>
+  <p>Lorem ipsum..</p>
+</div>
+
+<div class="container-fluid bg-3 text-center">
+  <h3>Where To Find Me?</h3>
+  <p>Lorem ipsum..</p>
+</div>
+-->
