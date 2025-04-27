@@ -152,8 +152,10 @@ var contents = "";
 const d = new Date();
 
 let day = addZero(d.getDate(),2);
-let month = addZero(d.getMonth(),2);
+let month = addZero(d.getMonth()+1,2);
 let year = d.getFullYear();
+
+
 
 let h = addZero(d.getHours(), 2);
 let m = addZero(d.getMinutes(), 2);
